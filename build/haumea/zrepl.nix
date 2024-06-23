@@ -22,7 +22,7 @@
       filesystems."rpool/safe<" = true;
       snapshotting = {
         type = "periodic";
-        interval = "15m";
+        interval = "1h";
         prefix = "zrepl_snap_";
         hooks = [ {
           # https://zrepl.github.io/master/configuration/snapshotting.html#postgres-checkpoint-hook
@@ -33,14 +33,16 @@
       };
       pruning = {
         keep_sender = [
+          { type = "not_replicated"; }
           {
             type = "grid";
             regex = "^zrepl_snap_.*";
             grid = lib.concatStringsSep " | " [
-              "4x15m"
-              "24x1h"
+              "1x1h"
+              "1x2h"
+              "1x4h"
+              "2x8h"
               "4x1d"
-              "3x1w"
             ];
           }
         ];
@@ -48,8 +50,10 @@
           { type = "grid";
             regex = "^zrepl_snap_.*";
             grid = lib.concatStringsSep " | " [
-              "96x1h"
-              "12x4h"
+              "1x1h"
+              "1x2h"
+              "1x4h"
+              "2x8h"
               "7x1d"
               "52x1w"
             ];
