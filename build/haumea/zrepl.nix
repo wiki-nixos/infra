@@ -41,8 +41,15 @@
               "1x1h"
               "1x2h"
               "1x4h"
+              # "grid" acts weird if an interval isn't a whole-number multiple
+              # of the previous one, so we jump from 8h to 24h
               "2x8h"
-              "4x1d"
+              "1x1d"
+              "1x2d"
+              "1x4d"
+              "1x8d"
+              # At this point we keep 9 snapshots spanning 8--16 days (depends on moment),
+              # with exponentially increasing spacing (almost).
             ];
           }
         ];
