@@ -82,18 +82,18 @@
       };
 
       jobs = [
-        # XXX: Broken since 2024-01-10?
-        # (defaultBackupJob // {
-        #   name = "rsyncnet";
-        #   connect = {
-        #     identity_file = "/root/.ssh/id_ed25519";
-        #     type = "ssh+stdinserver";
-        #     host = "zh2543b.rsync.net";
-        #     user = "root";
-        #     port = 22;
-        #   };
-        # })
-
+        # Covers 20240629+
+        (defaultBackupJob // {
+          name = "rsyncnet";
+          connect = {
+            identity_file = "/root/.ssh/id_ed25519";
+            type = "ssh+stdinserver";
+            host = "zh4461b.rsync.net";
+            user = "root";
+            port = 22;
+          };
+        })
+        /* Covered 2024: 0212 -- 0629
         (defaultBackupJob // {
           name = "hexa";
           connect = {
@@ -104,6 +104,7 @@
             port = 22;
           };
         })
+        */
       ];
     };
   };
