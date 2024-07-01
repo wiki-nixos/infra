@@ -22,7 +22,7 @@
       filesystems."rpool/safe<" = true;
       snapshotting = {
         type = "periodic";
-        interval = "1h";
+        interval = "30m";
         prefix = "zrepl_snap_";
         hooks = [ {
           # https://zrepl.github.io/master/configuration/snapshotting.html#postgres-checkpoint-hook
@@ -38,6 +38,7 @@
             type = "grid";
             regex = "^zrepl_snap_.*";
             grid = lib.concatStringsSep " | " [
+              "1x1h(keep=all)"
               "1x1h"
               "1x2h"
               "1x4h"
@@ -48,7 +49,7 @@
               "1x2d"
               "1x4d"
               "1x8d"
-              # At this point we keep 9 snapshots spanning 8--16 days (depends on moment),
+              # At this point we keep ~10 snapshots spanning 8--16 days (depends on moment),
               # with exponentially increasing spacing (almost).
             ];
           }
