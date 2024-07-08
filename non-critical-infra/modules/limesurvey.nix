@@ -211,6 +211,7 @@ in
       config = {
         tempdir = "${stateDir}/tmp";
         uploaddir = "${stateDir}/upload";
+        userquestionthemerootdir = "${stateDir}/upload/themes/question";
         # TODO: instead load these files from php
         encryptionnonce = cfg.encryptionNonceFile;
         encryptionsecretboxkey = cfg.encryptionKeyFile;
